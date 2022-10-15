@@ -1,5 +1,12 @@
+const mySecret = process.env['MONGO_URI']
+//using above line we have encoded the url in mySecret variable,we have given the entire url of the remote server where our database is hosted with the password of db in url itself that is why we have to put this url in environment variable so that it is not visible in code to public,we have created a MONGO_URI variable in .env file and assigned the complete url to this variable and then we have to use this variable in our code as process.env.
+
 require('dotenv').config();
 
+//we are requiring mongoose package here in our app that will help the nodejs apllication or server to compile or process the mongo db queries.
+let mongoose=require("mongoose")
+
+mongoose.connect(mySecret, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let Person;
 
