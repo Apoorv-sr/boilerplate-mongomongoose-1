@@ -8,7 +8,17 @@ let mongoose=require("mongoose")
 
 mongoose.connect(mySecret, { useNewUrlParser: true, useUnifiedTopology: true });
 
-let Person;
+//the below code will create a schema which we can map to any collection,see collections are similar to tables in sql dbs like oracle,mysql, and documents in mongodb is similar to row records in sql dbs,now the difference in sql and no sql dbs is sql dbs like oracle,mysql,potgres are based on relational databse model i.e they have a particular schema in which data has to be stored like a table has some columns in which data can be stored but the no sql dbs are not required to follow any schema i.e a collection can have documents of different schemas i.e there is no particular format that the nosql database has to follow but schema is the basis of sql,but if we want we can enforce schema on nosql dbs like mongodb also,like see in the below code we are creating a schema personSchema that we can enforce on collections,now the personSchema will have 3 values name and its type is string and required is true means this is a constraint i.e everydocument that will be created using this schema must have name,simalarly age and favoritefoods are also the values but they can be null.
+let personSchema=new mongoose.Schema({
+  name:{type:String,required:true},
+  age:{type:Number},
+  favoriteFoods:{type:[String]}
+})
+
+//now see using the below code we are creating a model i.e model in mongoose means collection in mongodb and the name of the model/collection we have given is Person but when this model/collection will created in the database the it will automatically get converted into plural form this is a feature of mongodb,and we are creating this model of type personSchema so the documents that we will create in this model/collection will be of type personScehma.
+let Person=new mongoose.model("Person",personSchema);
+
+
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
